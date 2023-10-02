@@ -14,10 +14,7 @@ def run_server():
     uvicorn.run(
         "app:app",
         # host='0.0.0.0',
-        port=7861,
-        # log_config=f"{cwd}/log.ini",
-        # workers=4,
-        reload=True
+        port=7861
     )
 
 

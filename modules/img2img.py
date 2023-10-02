@@ -31,7 +31,7 @@ def img2img(image, config:ENVConfig, style, save_input=True, **kwargs):
                     guidance_scale=OBJ[style]["cfg_scale"],
                     strength=OBJ[style]["denoising_strength"]).images[0]
 
-    return ImageToImageResponse(images=pil_to_bytes(generated_image), parameters={'scale_by': scale_by})
+    return ImageToImageResponse(images=[pil_to_bytes(generated_image)], parameters={'scale_by': scale_by})
 
 def img2url(image, config:ENVConfig, style, save_input=True, **kwargs):
     image_data = image.file.read()
@@ -65,4 +65,4 @@ def img2url(image, config:ENVConfig, style, save_input=True, **kwargs):
     output_path = output_path / f"{name}.png"
     generated_image.save(output_path)
 
-    return ImageToImageResponse(images=f"{config.domain_name}/{filename}", parameters={'scale_by': scale_by})
+    return ImageToImageResponse(images=[f"{config.domain_name}/{filename}"], parameters={'scale_by': scale_by})

@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 class ImageToImageResponse(BaseModel):
-    images: str
+    images: List[str]
     parameters: dict
 
 
@@ -25,7 +25,7 @@ class ENVConfig():
 # Load the Stable Diffusion pipeline
 def init_stable_diffusion_anime():
     model_path = "/data/danh/sd_anime/stable-diffusion-webui/models/Stable-diffusion/aamAnyloraAnimeMixAnime_v1.safetensors"
-    pipe = StableDiffusionImg2ImgPipeline.from_single_file(model_path)
+    pipe = StableDiffusionImg2ImgPipeline.from_single_file(model_path, torch_dtype=torch.float16)
     pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
     pipe = pipe.to("cuda")
 
@@ -49,7 +49,7 @@ def init_stable_diffusion_anime():
 
 def init_stable_diffusion_disney():
     model_path = "/data/danh/sd_anime/stable-diffusion-webui/models/Stable-diffusion/disneyPixarCartoon_v10.safetensors"
-    pipe = StableDiffusionImg2ImgPipeline.from_single_file(model_path)
+    pipe = StableDiffusionImg2ImgPipeline.from_single_file(model_path, torch_dtype=torch.float16)
     pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
     pipe = pipe.to("cuda")
 
